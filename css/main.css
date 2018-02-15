@@ -1,0 +1,89 @@
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #2A2740;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+nav {
+    top: 0;
+    height: 15vh;
+    width: 95vw;
+    position: absolute;
+    
+}
+
+.bar {
+    list-style: none;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 28vw;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 33vw;
+}
+
+.headline {
+    font-size: 2.5em;
+}
+
+.lede {
+    margin: none;
+    width: 80%;
+}
+
+.button-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    width: 50%;
+    background-color: #7771A1;
+    transition: .5s;
+    border-radius: 3%;
+}
+.button-box:hover {
+    background-color: #B9D3F7;
+}
+
+button {
+    height: 80px;
+    width: 80px;
+    align-self: center;
+    transition: .5s;
+    border: none;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+button:hover {
+    background-color: #7771A1;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: #ffffff;
+}

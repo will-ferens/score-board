@@ -87,3 +87,7 @@ a {
 a:hover {
     color: #ffffff;
 }
+
+.hidden {
+    display: none;
+}

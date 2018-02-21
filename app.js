@@ -1,12 +1,53 @@
 const url = 'https://winner-loser.herokuapp.com/games'
 
-var playerForm = document.querySelector('.player-form')
-var page = document.body
-var dropDown = document.body.querySelector('select')
+let playerForm = document.querySelector('.player-form')
+let page = document.body
+let dropDown = document.body.querySelector('select')
 let imgSrc = './imgs/qmark.jpg'
+
+
 let counter 
-let counterUp
-let counterDwn
+let counterUp 
+let counterDwn 
+
+let config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+}
+let observer = new MutationObserver(function(mutations){
+        console.log(mutations)
+        let scores = []
+        
+        function modifyQty(val) {
+            var qty = document.getElementsByClassName('amount').value
+            var newQty = parseInt(qty,10) + val;
+            
+            if (newQty < 0) {
+                newQty = 0
+            }
+            
+            document.getElementsByClassName('amount').value = newQty
+            return newQty
+        }
+
+        document.querySelectorAll('.counter-up').forEach(function(element){
+            console.log(element)
+            element.addEventListener('click', function(){
+                document.getElementsByClassName('amount').value++
+                console.log(document.getElementsByClassName('amount').value)
+            })
+        })
+        //document.getElementsByClassName('amount') 
+        //.addEventListener('click', function(){
+        //     console.log('poop')
+        //     modifyQty(+1)
+        // })
+        // counterDwn.addEventListener('click', function(){
+        //     modifyQty(-1)
+        // })
+})
+
 
 function newItem(item){
     return document.createElement(item)
@@ -39,17 +80,7 @@ function findImg(){
 
 findImg()
 
-function modifyQty(val) {
-    var qty = document.getElementById('counter').value;
-    var newQty = parseInt(qty,10) + val;
-    
-    if (newQty < 0) {
-        newQty = 0
-    }
-    
-    document.getElementById('counter').value = new_qty;
-    return newQty
-}
+
 
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
@@ -88,38 +119,46 @@ playerForm.addEventListener('submit', function(event){
             appendToPage(playerCard, playerName)
             
             counterDwn = newItem('button')
+            counterDwn.setAttribute('data', element)
             counterDwn.textContent = '-'
-            counterDwn.id = 'counter'
-            counterDwn.onClick = 'modifyQty(-1)'
+            counterDwn.className = 'counter-down'
             appendToPage(playerCard, counterDwn)
             
             counter = newItem('input')
-            counter.value = '0'
-            counter.id = 'amount'
+            counter.setAttribute('data', element)
+            counter.value = 0
+            counter.className = 'amount'
             appendToPage(playerCard, counter)
 
             counterUp = newItem('button')
+            counterUp.setAttribute('data', element)
             counterUp.textContent = '+'
-            counterUp.id = 'counter'
-            counterUp.onClick = 'modifyQty(+1)'
+            counterUp.className = 'counter-up'
             appendToPage(playerCard, counterUp)
         }
     })
 })
 
+observer.observe(page, config)
 
-function checkDOMChange(){
+
+//function checkDOMChange(){
     // check for any new element being inserted here,
     // or a particular node being modified
     
     // call the function again after 100 milliseconds
-    setTimeout( checkDOMChange, 100 )
-    counterUp.addEventListener('click', function(){
-        console.log('poopy pants')
-    })
-}
-
-checkDOMChange()
+    //add scores to an array
+    //compare scores to find winner
+    //add winner name, loser name, game name to JSON POST
+    //build leaderboard page
+        //all time
+        //each game
+        //most losingist 
+//     setTimeout( checkDOMChange, 100 )
+//     counterUp.addEventListener('click', function(){
+//         console.log('poopy pants')
+//     })
+// }
 
 function callLeaderBoard() {
     fetch(url).then(function(response){
@@ -128,3 +167,4 @@ function callLeaderBoard() {
 }
 
 callLeaderBoard()
+

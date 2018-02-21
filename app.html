@@ -5,16 +5,51 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Score Board!!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/app.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
         <body>
+            <main>
             <form class="player-form">
-                <input name="player" type="text" placeholder="Who's playing?">
-                <input name="player2" type="text" placeholder="Who's playing?">
-                <input name="player3" type="text" placeholder="Who's playing?">
-                <input name="player4" type="text" placeholder="Who's playing?">
-                <button class="player-submit" type="submit">Submit</button>
+                <ul>
+                    <li>
+                        <label>What game are you playing?</label>
+                        <select name="dropdown">
+                            <option value="" disabled selected>Choose a game</option>
+                            <option name="ssb" value="Super Smash Bros">Super Smash Bros</option>
+                            <option name="marioKart" value="Mario Kart">Mario Kart</option>
+                            <option name="halo" value="Halo">Halo</option>
+                            <option name="fifa" value="FIFA">FIFA</option>
+                            <option name="starcraft" value="Starcraft">Starcraft</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="players">Player 1</label>
+                        <input name="player" type="text" maxlength="100" placeholder="Who's playing?">
+                    </li>
+                    <li>
+                        <label for="players">Player 2</label>
+                        <input name="player2" type="text" maxlength="100" placeholder="Who's playing?">
+                    </li>
+                    <li>
+                        <label for="players">Player 3</label>
+                        <input name="player3" type="text" maxlength="100" placeholder="Who's playing?">
+                    </li>
+                    <li>
+                        <label for="players">Player 4</label>
+                        <input name="player4" type="text" maxlength="100" placeholder="Who's playing?">
+                    </li>
+                    
+                    <li>
+                        <button class="player-submit" type="submit">Submit</button>
+                    </li> 
+                </ul>
+            </form>
+        </main>
+            <form>
+                <form class="game-form">
+                   
+                </form>
             </form>
             <script src="app.js"></script>
         </body>

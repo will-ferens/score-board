@@ -1,0 +1,96 @@
+/*===============================================APPLICATION PAGE================================================*/
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #2A2740;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    height: 80px;
+    width: 80px;
+    align-self: center;
+    transition: .5s;
+    border: none;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+button:hover {
+    background-color: #7771A1;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: #ffffff;
+}
+
+
+.player-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 60%;
+
+}
+ul {
+    list-style: none;
+}
+li {
+    padding: 5px;
+}
+
+.player-submit{
+    margin: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.game-card {
+    height: 33%;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-img {
+    height: 60%;
+    width: 60%;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#amount {
+    color: #ffffff;
+    font-size: 1.5em;
+	background-color: transparent;
+	text-align: center;
+	border-width: 0;
+	width: 20px;
+	margin: 0 0 .1em 0;
+}
+
+#counter {
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+}

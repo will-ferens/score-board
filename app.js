@@ -33,9 +33,12 @@ let observer = new MutationObserver(function(mutations){
 
         document.querySelectorAll('.counter-up').forEach(function(element){
             console.log(element)
-            element.addEventListener('click', function(){
-                document.getElementsByClassName('amount').value++
-                console.log(document.getElementsByClassName('amount').value)
+            element.addEventListener('click', function(event){
+                console.log(event.target)
+                if(event.target.getAttribute('data') == document.querySelector('.amount').getAttribute('data')){
+                    document.querySelector('.amount').value++
+                }   
+                //console.log(document.querySelector('.amount').value)
             })
         })
         //document.getElementsByClassName('amount') 

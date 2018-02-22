@@ -5,53 +5,6 @@ let page = document.body
 let dropDown = document.body.querySelector('select')
 let imgSrc = './imgs/qmark.jpg'
 
-
-let counter 
-let counterUp 
-let counterDwn 
-
-let config = {
-    attributes: true,
-    childList: true,
-    characterData: true
-}
-let observer = new MutationObserver(function(mutations){
-        console.log(mutations)
-        let scores = []
-        
-        function modifyQty(val) {
-            var qty = document.getElementsByClassName('amount').value
-            var newQty = parseInt(qty,10) + val;
-            
-            if (newQty < 0) {
-                newQty = 0
-            }
-            
-            document.getElementsByClassName('amount').value = newQty
-            return newQty
-        }
-
-        document.querySelectorAll('.counter-up').forEach(function(element){
-            console.log(element)
-            element.addEventListener('click', function(event){
-                console.log(event.target)
-                if(event.target.getAttribute('data') == document.querySelector('.amount').getAttribute('data')){
-                    document.querySelector('.amount').value++
-                }   
-                //console.log(document.querySelector('.amount').value)
-            })
-        })
-        //document.getElementsByClassName('amount') 
-        //.addEventListener('click', function(){
-        //     console.log('poop')
-        //     modifyQty(+1)
-        // })
-        // counterDwn.addEventListener('click', function(){
-        //     modifyQty(-1)
-        // })
-})
-
-
 function newItem(item){
     return document.createElement(item)
 }
@@ -83,8 +36,6 @@ function findImg(){
 
 findImg()
 
-
-
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
     const submissions = new FormData(event.target)
@@ -112,58 +63,47 @@ playerForm.addEventListener('submit', function(event){
     appendToPage(gameCard, gameImg)
 
     playerValues.forEach(function(element, index){
-        if(element !== ''){
-            var playerCard = newItem('div')
-            playerCard.className = 'player-card'
-            appendToPage(page, playerCard)
+        let counter 
+        let counterUp 
+        let counterDwn 
+            if(element !== ''){
+                var playerCard = newItem('div')
+                playerCard.className = 'player-card'
+                appendToPage(page, playerCard)
 
-            var playerName = newItem('p')
-            playerName.textContent = element
-            appendToPage(playerCard, playerName)
-            
-            counterDwn = newItem('button')
-            counterDwn.setAttribute('data', element)
-            counterDwn.textContent = '-'
-            counterDwn.className = 'counter-down'
-            appendToPage(playerCard, counterDwn)
-            
-            counter = newItem('input')
-            counter.setAttribute('data', element)
-            counter.value = 0
-            counter.className = 'amount'
-            appendToPage(playerCard, counter)
+                var playerName = newItem('p')
+                playerName.textContent = element
+                appendToPage(playerCard, playerName)
+                
+                counterDwn = newItem('button')
+                counterDwn.setAttribute('data-player-name', element)
+                counterDwn.textContent = '-'
+                counterDwn.className = 'counter-down'
+                appendToPage(playerCard, counterDwn)
+                
+                counter = newItem('input')
+                counter.setAttribute('data-player-name', element)
+                counter.value = 0
+                counter.className = 'amount'
+                appendToPage(playerCard, counter)
 
-            counterUp = newItem('button')
-            counterUp.setAttribute('data', element)
-            counterUp.textContent = '+'
-            counterUp.className = 'counter-up'
-            appendToPage(playerCard, counterUp)
-        }
-    })
+                counterUp = newItem('button')
+                counterUp.setAttribute('data-player-name', element)
+                counterUp.textContent = '+'
+                counterUp.className = 'counter-up'
+                appendToPage(playerCard, counterUp)
+
+                counterDwn.addEventListener('click', function(){
+                    console.log('poop')
+                    counter.value = Number(counter.value) -1
+                })
+                counterUp.addEventListener('click', function(){
+                    counter.value = Number(counter.value) +1
+                })
+            }
+        })
 })
 
-observer.observe(page, config)
-
-
-//function checkDOMChange(){
-    // check for any new element being inserted here,
-    // or a particular node being modified
-    
-    // call the function again after 100 milliseconds
-    //add scores to an array
-    //compare scores to find winner
-    //add winner name, loser name, game name to JSON POST
-    //build leaderboard page
-        //all time
-        //each game
-        //most losingist 
-//     setTimeout( checkDOMChange, 100 )
-//     counterUp.addEventListener('click', function(){
-//         console.log('poopy pants')
-//     })
-// }
-
-function callLeaderBoard() {
     fetch(url).then(function(response){
     console.log(response.json())
     })

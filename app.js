@@ -5,6 +5,9 @@ let page = document.body
 let dropDown = document.body.querySelector('select')
 let imgSrc = './imgs/qmark.jpg'
 
+let scores = {}
+
+
 function newItem(item){
     return document.createElement(item)
 }
@@ -36,11 +39,12 @@ function findImg(){
 
 findImg()
 
+
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
     const submissions = new FormData(event.target)
-    var gameName = submissions.get("dropdown")
-    var playerValues = [
+    let gameName = submissions.get("dropdown")
+    let playerValues = [
         submissions.get("player"), 
         submissions.get("player2"),
         submissions.get("player3"), 
@@ -48,34 +52,47 @@ playerForm.addEventListener('submit', function(event){
     ]
     playerForm.className = "hidden"
 
-    var gameCard = newItem('div')
+    let gameCard = newItem('div')
     gameCard.className = 'game-card'
     appendToPage(page, gameCard)
     
-    var printGame = newItem('p')
+    let printGame = newItem('p')
     printGame.textContent = gameName
     appendToPage(gameCard, printGame)
 
-    var gameImg = newItem('img')
+    let gameImg = newItem('img')
     gameImg.src = imgSrc
     gameImg.id = 'game-img'
 
     appendToPage(gameCard, gameImg)
 
-    playerValues.forEach(function(element, index){
-        let counter 
-        let counterUp 
-        let counterDwn 
-            if(element !== ''){
-                var playerCard = newItem('div')
-                playerCard.className = 'player-card'
-                appendToPage(page, playerCard)
+    let gameForm = newItem('FORM')
+    gameForm.className = 'game-form'
+    appendToPage(page, gameForm)
 
-                var playerName = newItem('p')
+    let gameEnd = newItem('button')
+    gameEnd.textContent = 'End Session' 
+    gameEnd.type = 'submit'
+    
+    //compare scores
+    //find winner/loser
+    //post game to API
+    
+    appendToPage(gameForm, gameEnd)
+
+    playerValues.forEach(function(element, index){
+            let counter
+            if(element !== ''){
+                let playerCard = newItem('div')
+                playerCard.className = 'player-card'
+                appendToPage(gameForm, playerCard)
+
+                let playerName = newItem('p')
                 playerName.textContent = element
                 appendToPage(playerCard, playerName)
                 
                 counterDwn = newItem('button')
+                counterDwn.type = 'button'
                 counterDwn.setAttribute('data-player-name', element)
                 counterDwn.textContent = '-'
                 counterDwn.className = 'counter-down'
@@ -88,26 +105,37 @@ playerForm.addEventListener('submit', function(event){
                 appendToPage(playerCard, counter)
 
                 counterUp = newItem('button')
+                counterUp.type = 'button'
                 counterUp.setAttribute('data-player-name', element)
                 counterUp.textContent = '+'
                 counterUp.className = 'counter-up'
                 appendToPage(playerCard, counterUp)
 
                 counterDwn.addEventListener('click', function(){
-                    console.log('poop')
                     counter.value = Number(counter.value) -1
                 })
                 counterUp.addEventListener('click', function(){
                     counter.value = Number(counter.value) +1
                 })
+                gameEnd.addEventListener('click', function(event){
+                    event.preventDefault()
+                    let data = playerName.textContent
+                    scores[data] = counter.value
+                    console.log(Object.values(scores))
+                })
             }
-        })
+            
+    })
+    
+    
+
+   
 })
 
+function callLeaderBoard(){
     fetch(url).then(function(response){
-    console.log(response.json())
+        console.log(response.json())
     })
 }
-
 callLeaderBoard()
 

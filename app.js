@@ -121,17 +121,31 @@ playerForm.addEventListener('submit', function(event){
                     event.preventDefault()
                     let data = playerName.textContent
                     scores[data] = counter.value
-                    console.log(Object.values(scores))
+                    playerCard.className = 'hidden'
+                    gameCard.className = 'hidden'
+                    gameEnd.className = 'hidden'
                 })
-            }
-            
+            }     
     })
-    
+    gameEnd.addEventListener('click', function(event){
+        let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b)
+        let loser = Object.keys(scores).reduce((a, b) => scores[a] < scores[b] ? a : b)
+
+        let printWinner = newItem('h1')
+        printWinner.textContent = winner + ' wins!'
+        appendToPage(page, printWinner)
+
+        let printLoser = newItem('h1')
+        printLoser.textContent = loser + ' loses.'
+        appendToPage(page, printLoser)
+
+        
+    })
     
 
    
 })
-
+// 
 function callLeaderBoard(){
     fetch(url).then(function(response){
         console.log(response.json())

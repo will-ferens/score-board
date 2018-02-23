@@ -7,7 +7,6 @@ let imgSrc = './imgs/qmark.jpg'
 
 let scores = {}
 
-
 function newItem(item){
     return document.createElement(item)
 }
@@ -38,7 +37,6 @@ function findImg(){
 }
 
 findImg()
-
 
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
@@ -72,12 +70,7 @@ playerForm.addEventListener('submit', function(event){
 
     let gameEnd = newItem('button')
     gameEnd.textContent = 'End Session' 
-    gameEnd.type = 'submit'
-    
-    //compare scores
-    //find winner/loser
-    //post game to API
-    
+    gameEnd.type = 'submit' 
     appendToPage(gameForm, gameEnd)
 
     playerValues.forEach(function(element, index){

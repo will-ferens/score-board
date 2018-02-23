@@ -1,5 +1,9 @@
 const url = 'https://winner-loser.herokuapp.com/games'
+const igdb = require('igdb-api-node').default
+const client = igdb('9f84fdadc9232e8d8827d2261537379a')
 
+
+let searchResponse
 let playerForm = document.querySelector('.player-form')
 let page = document.body
 let dropDown = document.body.querySelector('select')
@@ -14,34 +18,12 @@ function appendToPage(parent, element){
     return parent.appendChild(element)
 }
 
-function findImg(){
-    dropDown.addEventListener('change', function(){
-        switch(dropDown.value){
-            case 'Super Smash Bros': 
-                imgSrc = './imgs/ssb.png'
-            break
-            case 'Mario Kart':
-                imgSrc = './imgs/smk.jpg'
-            break
-            case 'Halo':
-                imgSrc = './imgs/halo.jpg'
-            break
-            case 'FIFA':
-                imgSrc = './imgs/fifa.jpg'
-            break
-            case 'Starcraft':
-                imgSrc = './imgs/sc.jpg'
-            break
-        }
-    })
-}
 
-findImg()
 
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
     const submissions = new FormData(event.target)
-    let gameName = submissions.get("dropdown")
+    let searchResponse = submissions.get("search")
     let playerValues = [
         submissions.get("player"), 
         submissions.get("player2"),
@@ -49,20 +31,20 @@ playerForm.addEventListener('submit', function(event){
         submissions.get("player4")
     ]
     playerForm.className = "hidden"
-
-    let gameCard = newItem('div')
-    gameCard.className = 'game-card'
-    appendToPage(page, gameCard)
     
-    let printGame = newItem('p')
-    printGame.textContent = gameName
-    appendToPage(gameCard, printGame)
-
-    let gameImg = newItem('img')
-    gameImg.src = imgSrc
-    gameImg.id = 'game-img'
-
-    appendToPage(gameCard, gameImg)
+    client.games({
+        fields: '*', // Return all fields
+        limit: 5, // Limit to 5 results
+        offset: 15,
+        search: searchResponse // Index offset for results
+    }, [
+        'name',
+        'cover'
+    ]).then(response => {
+        console.log(response.json())
+    }).catch(error => {
+        throw error
+    })
 
     let gameForm = newItem('FORM')
     gameForm.className = 'game-form'
@@ -138,7 +120,9 @@ playerForm.addEventListener('submit', function(event){
 
    
 })
-// 
+
+
+
 function callLeaderBoard(){
     fetch(url).then(function(response){
         console.log(response.json())

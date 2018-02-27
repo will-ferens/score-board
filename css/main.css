@@ -80,15 +80,32 @@ button:hover {
     background-color: #7771A1;
     color: #ffffff;
 }
+.leader {
+    text-decoration: none;
+    color: #ffffff;
+}
 
+.leader:hover {
+    color: #8778F1;
+}
+
+.game-link {
+    color: #8778F1
+}
 a {
     text-decoration: none;
 }
 a:hover {
     color: #ffffff;
 }
+.leader:visited {
+    color: #ffffff
+}
 
 .hidden {
     display: none;
 }
 
+.board-buttons {
+    margin-bottom: 25px;
+}

@@ -68,6 +68,10 @@ li {
     align-items: center;
 }
 
+.game-end {
+    justify-content: end;
+}
+
 #game-img {
     height: 60%;
     width: 60%;

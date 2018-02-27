@@ -1,13 +1,15 @@
+const key = '9f84fdadc9232e8d8827d2261537379a'
+const package = './package.json'
 const url = 'https://winner-loser.herokuapp.com/games'
-const igdb = require('igdb-api-node').default
-const client = igdb('9f84fdadc9232e8d8827d2261537379a')
+
 
 
 let searchResponse
 let playerForm = document.querySelector('.player-form')
-let page = document.body
+let page = document.body.querySelector('main')
 let dropDown = document.body.querySelector('select')
 let imgSrc = './imgs/qmark.jpg'
+let gameChosen = 'none'
 
 let scores = {}
 
@@ -18,7 +20,25 @@ function appendToPage(parent, element){
     return parent.appendChild(element)
 }
 
-
+function getGames() {
+    fetch(package, {
+    headers:  {
+        "Accept": "application/json"
+   },
+   method: 'GET'
+}).then(response => {
+    return response.json()
+}).then(response => {
+    Object.keys(response).map(current => {
+        let option = newItem('option')
+        
+        option.textContent = current
+        option.value = current
+        appendToPage(dropDown, option)
+    })
+})
+}
+getGames()
 
 playerForm.addEventListener('submit', function(event){
     event.preventDefault()
@@ -30,29 +50,21 @@ playerForm.addEventListener('submit', function(event){
         submissions.get("player3"), 
         submissions.get("player4")
     ]
+    gameChosen = dropDown.value
     playerForm.className = "hidden"
-    
-    client.games({
-        fields: '*', // Return all fields
-        limit: 5, // Limit to 5 results
-        offset: 15,
-        search: searchResponse // Index offset for results
-    }, [
-        'name',
-        'cover'
-    ]).then(response => {
-        console.log(response.json())
-    }).catch(error => {
-        throw error
-    })
 
     let gameForm = newItem('FORM')
     gameForm.className = 'game-form'
     appendToPage(page, gameForm)
 
+    let printGame = newItem('h2')
+    printGame.textContent = gameChosen
+    appendToPage(gameForm, printGame)
+
     let gameEnd = newItem('button')
     gameEnd.textContent = 'End Session' 
-    gameEnd.type = 'submit' 
+    gameEnd.type = 'submit'
+    gameEnd.className = 'game-end' 
     appendToPage(gameForm, gameEnd)
 
     playerValues.forEach(function(element, index){
@@ -97,7 +109,6 @@ playerForm.addEventListener('submit', function(event){
                     let data = playerName.textContent
                     scores[data] = counter.value
                     playerCard.className = 'hidden'
-                    gameCard.className = 'hidden'
                     gameEnd.className = 'hidden'
                 })
             }     
@@ -113,20 +124,24 @@ playerForm.addEventListener('submit', function(event){
         let printLoser = newItem('h1')
         printLoser.textContent = loser + ' loses.'
         appendToPage(page, printLoser)
-
         
+        function postLeaderBoard(){
+            fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "game_name": gameChosen,
+                        "winner_name": winner,
+                        "loser_name": loser
+                    })
+            }).then(response => {
+               return response
+            })
+        }
+        postLeaderBoard()
     })
-    
-
-   
 })
-
-
-
-function callLeaderBoard(){
-    fetch(url).then(function(response){
-        console.log(response.json())
-    })
-}
-callLeaderBoard()
 

@@ -1,48 +1,22 @@
 {
-        "Super Smash Brothers": {
-            "platform": "N64",
-            "cover": "./imgs/ssb64.jpg"
-        },
-        "Super Smash Brothers Melee": {
-            "platform": "Gamecube",
-            "cover": ""
-        },
-        "Mario Kart 64": {
-            "platform": "N64",
-            "cover": ""
-        },
-        "Halo": {
-            "platform": "Xbox",
-            "cover": ""
-        },
-        "Halo 2": {
-            "platform": "Xbox",
-            "cover": ""
-        },
-        "Halo 3": {
-            "platform": "Xbox 360",
-            "cover": ""
-        },
-        "Mario Party 2": {
-            "platform": "N64",
-            "cover": ""
-        },
-        "Starcraft II": {
-            "platform": "PC",
-            "cover": ""
-        },
-        "HearthStone": {
-            "platform": "PC",
-            "cover": ""
-        },
-        "FIFA": {
-            "platform": "Xbox/Playstation",
-            "cover": ""
-        },
-        "NHL": {
-            "platform": "Xbox/Playstation",
-            "cover": ""
-        }
-        
-    }
-    
+  "name": "q2-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/will-ferens/score-board.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/will-ferens/score-board/issues"
+  },
+  "homepage": "https://github.com/will-ferens/score-board#readme",
+  "dependencies": {
+    "cypress": "^2.1.0"
+  }
+}

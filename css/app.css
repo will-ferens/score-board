@@ -10,7 +10,31 @@ body {
     color: #ffffff;
     font-family: 'Open Sans', sans-serif;
 }
+nav {
+    top: 0;
+    height: 15vh;
+    width: 95vw;
+    position: absolute;
+    
+}
 
+.bar {
+    list-style: none;
+}
+.leader {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.leader:hover {
+    color: #8778F1;
+}
+a:hover {
+    color: #ffffff;
+}
+.leader:visited {
+    color: #ffffff
+}
 button {
     height: 80px;
     width: 80px;

@@ -1,5 +1,5 @@
 const key = '9f84fdadc9232e8d8827d2261537379a'
-const package = './package.json'
+const package = './games.json'
 const url = 'https://winner-loser.herokuapp.com/games'
 
 
@@ -145,3 +145,6 @@ playerForm.addEventListener('submit', function(event){
     })
 })
 
+//TO-DO: Unfuck css
+//Make it mobile
+//*add css animations?

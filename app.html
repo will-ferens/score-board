@@ -10,13 +10,19 @@
     </head>
         <body>
             <main>
+                <nav>
+                    <ul class="bar">
+                        <li><a href="./leader.html" class="leader">Leaderboard</a></li>
+                        <li><a href="./contact.html" class="leader">Contact</a></li>
+                    </ul>
+                </nav>
             <form class="player-form">
                 <label for="games">What game are you playing?</label>
-                <select name="games">
+                <select name="games"></select>
                 <ul>
                     <li>
                         <label for="players">Player 1</label>
-                        <input name="player" type="text" maxlength="100" placeholder="Who's playing?">
+                        <input autoFocus name="player" type="text" maxlength="100" placeholder="Who's playing?">
                     </li>
                     <li>
                         <label for="players">Player 2</label>
